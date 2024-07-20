@@ -11,7 +11,7 @@ ENV PORT=8080
 WORKDIR /opt/app-root/src
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY --chown=1001:0 package*.json ./
 
 # list files
 RUN ls -lhart
