@@ -1,32 +1,30 @@
 # Use Red Hat Universal Base Image (UBI) 8
 FROM registry.access.redhat.com/ubi8/nodejs-18
 
-# Create an app user
-RUN useradd -m app
+# Switch to the app user
+USER 1001
+
+# Tell the app to listen on this port
+ENV PORT=8080
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /opt/app-root/src
+
+# Change ownership of the /app directory to the app user
+RUN chown -R 1001:0 /opt/app-root/src && \
+    chmod -R g=u /opt/app-root/src
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
-
-# Change ownership of the /app directory to the app user
-RUN chown -R app:app /app
-
-# Switch to the app user
-USER app
+# Change ownership of the /opt/app-root/src directory to the app user
+RUN chown -R 1001:0 /opt/app-root/src
 
 # Install dependencies
 RUN npm install
-
-# Copy the rest of the application code
-COPY --chown=app:app . .
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the application
 CMD ["npm", "start"]
