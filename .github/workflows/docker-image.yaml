@@ -33,7 +33,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        tags: ghcr.io/my-eliandro-app:latest,Eliandro/app:latest
+        tags: esimim/eliandro-app:latest
         context: .
         push: true
         cache-from: type=local,src=/tmp/.buildx-cache
