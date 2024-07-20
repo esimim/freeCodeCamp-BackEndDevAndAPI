@@ -10,15 +10,8 @@ ENV PORT=8080
 # Set the working directory
 WORKDIR /opt/app-root/src
 
-# Change ownership of the /app directory to the app user
-RUN chown -R 1001:0 /opt/app-root/src && \
-    chmod -R g=u /opt/app-root/src
-
 # Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Change ownership of the /opt/app-root/src directory to the app user
-RUN chown -R 1001:0 /opt/app-root/src
 
 # Install dependencies
 RUN npm install
