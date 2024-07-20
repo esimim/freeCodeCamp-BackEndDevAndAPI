@@ -13,6 +13,9 @@ WORKDIR /opt/app-root/src
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# list files
+RUN ls -lhart
+
 # Install dependencies
 RUN npm install
 
