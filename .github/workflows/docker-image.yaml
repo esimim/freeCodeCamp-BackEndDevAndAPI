@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubi8/nodejs-18:1-114.1720405264
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
