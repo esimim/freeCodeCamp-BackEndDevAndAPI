@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      packages: write
-
-    permissions:
       actions: write
       attestations: write
       checks: write
