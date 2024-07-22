@@ -5,11 +5,11 @@ on:
     branches:
       - development
 
+permissions: write-all
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    permissions: write-all
 
     steps:
     - name: Checkout
