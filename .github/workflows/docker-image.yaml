@@ -9,21 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    permissions:
-      actions: write
-      attestations: write
-      checks: write
-      contents: write
-      deployments: write
-      id-token: write
-      issues: write
-      discussions: write
-      packages: write
-      pages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
+    permissions: write-all
 
     steps:
     - name: Checkout
@@ -38,7 +24,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        tags: esimim/eliandro-app:latest
-        context: .
         push: true
+        tags: esimim/my2app:latest
+
 
