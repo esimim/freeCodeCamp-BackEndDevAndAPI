@@ -1,4 +1,9 @@
-# Managing Packages With npm
+# Access the Kubernetes Cluster
 
-This is the boilerplate code for the Managing Packages With npm Challenges. Instructions for working on these challenges start at https://www.freecodecamp.org/learn/back-end-development-and-apis/managing-packages-with-npm/
+```
+$ export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile kops-manager)
 
+$ export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile kops-manager)
+
+$ kops export kubeconfig cluster.cloudvix.com.br --admin
+```
