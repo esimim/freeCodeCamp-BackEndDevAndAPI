@@ -30,7 +30,7 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v4
       with:
-        version: '1.30.3'
+        version: '1.28.4'
       id: install
     
   
