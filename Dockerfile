@@ -13,6 +13,9 @@ WORKDIR /opt/app-root/src
 # Copy package.json and package-lock.json
 COPY --chown=1001:0 package*.json ./
 
+# Copy server.js
+COPY --chown=1001:0 server.js ./server.js
+
 # list files
 RUN ls -lhart
 

@@ -27,10 +27,17 @@ jobs:
         push: true
         tags: ghcr.io/esimim/freecodecamp-backenddevandapi:latest
 
+    - name: Set up kubeconfig
+      run: echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+
     - name: Setup kubectl
       uses: azure/setup-kubectl@v4
       with:
         version: 'v1.28.4'
       id: install
     
-  
+    - name: List objects
+      run: kubectl get all -n apps
+    # - name: deploy to kubernetes
+    #   run: kubectl apply -n apps Deployment-freeCodeCamp.yaml
+    

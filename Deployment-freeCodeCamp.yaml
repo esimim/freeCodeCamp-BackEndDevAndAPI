@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: freecodecamp
+  name: freecodecamp
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freecodecamp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: freecodecamp
+    spec:
+      imagePullSecrets:
+        - name: github-container-registry
+      containers:
+      - image: ghcr.io/esimim/freecodecamp-backenddevandapi:latest
+        name: freecodecamp-backenddevandapi
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
