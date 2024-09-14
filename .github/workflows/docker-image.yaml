@@ -30,14 +30,9 @@ jobs:
     - name: Set up kubeconfig
       run:  |
         mkdir $HOME/.kube
+        sudo apt-get update && sudo apt-cache madison kubectl && sudo apt-get install -y kubectl='1.28.4'
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
         export KUBECONFIG=$HOME/.kube/config
-
-    - name: Setup kubectl
-      uses: azure/setup-kubectl@v4
-      with:
-        version: 'v1.28.4'
-      id: install
     
     - name: List objects
       run: kubectl get all -n apps
