@@ -40,7 +40,7 @@ jobs:
         sudo mv ./kubectl /usr/local/bin/kubectl
     
     - name: List objects
-      run: kubectl get all -n apps
+      run: kubectl --kubeconfig $HOME/.kube/config get all -n apps
     # - name: deploy to kubernetes
     #   run: kubectl apply -n apps Deployment-freeCodeCamp.yaml
     
