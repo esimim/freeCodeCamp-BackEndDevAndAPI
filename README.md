@@ -7,3 +7,4 @@ $ export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profi
 
 $ kops export kubeconfig cluster.cloudvix.com.br --admin
 ```
+

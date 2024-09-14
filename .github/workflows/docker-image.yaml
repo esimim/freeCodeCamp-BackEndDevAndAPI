@@ -28,7 +28,9 @@ jobs:
         tags: ghcr.io/esimim/freecodecamp-backenddevandapi:latest
 
     - name: Set up kubeconfig
-      run: echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+      run:  |
+        mkdit $HOME/.kube
+        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
     - name: Setup kubectl
       uses: azure/setup-kubectl@v4
