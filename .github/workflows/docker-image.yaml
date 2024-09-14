@@ -30,7 +30,7 @@ jobs:
     - name: Set up kubeconfig
       run:  |
         mkdir $HOME/.kube
-        sudo apt-get update && sudo apt-cache madison kubectl && sudo apt-get install -y kubectl='v1.28.4'
+        sudo apt-get update && sudo apt install kubectl=1.28.4-00
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
         export KUBECONFIG=$HOME/.kube/config
     
