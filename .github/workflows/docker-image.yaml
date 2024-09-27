@@ -41,6 +41,13 @@ jobs:
     
     - name: List objects
       run: kubectl --kubeconfig $HOME/.kube/config get all -n apps
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl --kubeconfig $HOME/.kube/config get -n apps deployment freecodecamp
+        kubectl --kubeconfig $HOME/.kube/config -n apps scale deployment freecodecamp --replicas=0
+        sleep 5
+        kubectl --kubeconfig $HOME/.kube/config -n apps scale deployment freecodecamp --replicas=1
     # - name: deploy to kubernetes
     #   run: kubectl apply -n apps Deployment-freeCodeCamp.yaml
     
