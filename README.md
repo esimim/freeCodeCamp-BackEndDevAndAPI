@@ -70,6 +70,23 @@ Document daily progress here, marking any errors encountered, possible solutions
 ---
 
 
+**[Date - 2024/10/05]**
+
+- **Worked on:** 
+  - Task 3: Access the application from the outside world and finish lesson 1.
+
+- **Current Status:** Service created but can't access it from outside the cluster.
+  
+- **Errors/Challenges:** [Document any current errors]
+
+- **Solution:** [If a solution is known but not implemented, document it here]
+
+- **Next Steps:** [Briefly describe the next steps for tomorrow's session]
+
+
+---
+
+
 **[Date - 2024/09/22]**
 
 - **Worked on:** [Task]

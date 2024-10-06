@@ -10,11 +10,14 @@ ENV PORT=8080
 # Set the working directory
 WORKDIR /opt/app-root/src
 
+RUN chown -R 1001:0 /opt/app-root/src && \
+    chmod -R g=u /opt/app-root/src
+
 # Copy package.json and package-lock.json
-COPY --chown=1001:0 newapp/package*.json ./
+COPY --chown=1001:0 newapp/package.json package.json
 
 # Copy server.js
-COPY --chown=1001:0 newapp/index.js ./index.js
+COPY --chown=1001:0 newapp/index.js index.js
 
 # list files
 RUN ls -lhart
