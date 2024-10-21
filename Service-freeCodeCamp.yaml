@@ -15,5 +15,3 @@ spec:
   selector:
     app: freecodecamp
   type: ClusterIP
-status:
-  loadBalancer: {}

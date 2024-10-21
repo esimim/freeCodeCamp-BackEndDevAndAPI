@@ -1,0 +1,98 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'This Stack creates a security group for Cloudvix k8s cluster allowing HTTP and HTTPS traffic.'
+Metadata:
+  License: Apache-2.0
+  Maintainer: Cloudvix
+  Version: '1.0'
+Resources:
+  ALBSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: 'ALBSecurityGroup'
+      GroupDescription: 'Security group for web server allowing HTTP and HTTPS traffic'
+      VpcId: 'vpc-0ff4b82bca046d430'  # Replace with your VPC ID
+      SecurityGroupIngress:
+        - IpProtocol: 'tcp'
+          FromPort: 80
+          ToPort: 80
+          CidrIp: '0.0.0.0/0'
+        - IpProtocol: 'tcp'
+          FromPort: 443
+          ToPort: 443
+          CidrIp: '0.0.0.0/0'
+      Tags:
+        - Key: 'Name'
+          Value: 'ALBSecurityGroup'
+        - Key: 'Environment'
+          Value: 'Production'
+        - Key: 'Project'
+          Value: 'Cloudvix'
+        - Key: 'Owner'
+          Value: 'Eliandro'
+
+  AcceptFromALBport80:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      IpProtocol: tcp
+      FromPort: '31270'
+      ToPort: '31270'
+      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
+
+  AcceptFromALBport443:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      IpProtocol: tcp
+      FromPort: '31642'
+      ToPort: '31642'
+      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
+
+  AcceptFromALBAllTraffic:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      IpProtocol: -1
+      FromPort: -1
+      ToPort: -1
+      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
+
+  AcceptOnPort30638:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      IpProtocol: tcp
+      FromPort: '30638'
+      ToPort: '30638'
+      CidrIp: '0.0.0.0/0'
+
+Outputs:
+  ALBSecurityGroupId:
+    Description: 'The ID of the security group'
+    Value: !Ref ALBSecurityGroup
+    Export:
+      Name: !Sub '${AWS::StackName}-SecurityGroupId'
+
+# to create the stack
+# aws cloudformation create-stack --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --profile kops-manager
+
+# to create a change set
+# aws cloudformation create-change-set --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --change-set-name OpenPort30638 --description 'Accept on port 30638 from the world.' --profile kops-manager
+
+# to update the stack
+# aws cloudformation update-stack --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --profile kops-manager
+
+
+# helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace --set  controller.service.type=LoadBalancer --set controller.service.annotations."alb\.ingress\.kubernetes\.io/security-groups"="sg-0fea03381553e41b2"
+
+# helm upgrade ingress-nginx/ingress-nginx --repo https://kubernetes.github.io/ingress-nginx  --namespace ingress-nginx \
+#   --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-ssl-cert"="arn:aws:acm:us-east-1:910248555191:certificate/6adf88a4-0065-4eb8-a7cc-6ac2094e03e1" \
+#   --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-backend-protocol"="http" \
+#   --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-ssl-ports"="443" \
+#   --set controller.service.type=LoadBalancer
+
+# arn:aws:acm:us-east-1:910248555191:certificate/6adf88a4-0065-4eb8-a7cc-6ac2094e03e1
+
+# helm upgrade ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace --set  controller.service.type=LoadBalancer --set controller.service.annotations."alb\.ingress\.kubernetes\.io/security-groups"="sg-0fea03381553e41b2" --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-backend-protocol"="http" --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-ssl-ports"="443" --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-ssl-cert"="arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012" --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-ssl-negotiation-policy"="ELBSecurityPolicy-TLS-1-2-2017-01"
+
+# kubectl delete all --all -n ingress-nginx -l release=ingress-nginx

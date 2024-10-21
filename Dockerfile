@@ -14,10 +14,10 @@ RUN chown -R 1001:0 /opt/app-root/src && \
     chmod -R g=u /opt/app-root/src
 
 # Copy package.json and package-lock.json
-COPY --chown=1001:0 newapp/package.json package.json
+COPY --chown=1001:0 package.json package.json
 
 # Copy server.js
-COPY --chown=1001:0 newapp/index.js index.js
+COPY --chown=1001:0 server.js server.js
 
 # list files
 RUN ls -lhart
