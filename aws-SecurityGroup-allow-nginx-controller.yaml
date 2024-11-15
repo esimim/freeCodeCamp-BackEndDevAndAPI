@@ -30,40 +30,34 @@ Resources:
         - Key: 'Owner'
           Value: 'Eliandro'
 
-  AcceptFromALBport80:
-    Type: 'AWS::EC2::SecurityGroupIngress'
-    Properties:
-      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
-      IpProtocol: tcp
-      FromPort: '31270'
-      ToPort: '31270'
-      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
-
-  AcceptFromALBport443:
-    Type: 'AWS::EC2::SecurityGroupIngress'
-    Properties:
-      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
-      IpProtocol: tcp
-      FromPort: '31642'
-      ToPort: '31642'
-      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
-
   AcceptFromALBAllTraffic:
     Type: 'AWS::EC2::SecurityGroupIngress'
     Properties:
-      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      GroupId: 'sg-096df42733857db7f'
       IpProtocol: -1
       FromPort: -1
       ToPort: -1
-      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed' # Replace with your ALB security group ID
+      SourceSecurityGroupId: 'sg-0ce4e7776233a3bed'
 
-  AcceptOnPort30638:
+  AcceptOnPort31324:
     Type: 'AWS::EC2::SecurityGroupIngress'
     Properties:
-      GroupId: 'sg-096df42733857db7f'  # Replace with your ASG security group ID
+      Description: 'Allow HTTP traffic on port 31324 from the world.'
+      GroupId: 'sg-096df42733857db7f'
       IpProtocol: tcp
-      FromPort: '30638'
-      ToPort: '30638'
+      FromPort: '31324'
+      ToPort: '31324'
+      CidrIp: '0.0.0.0/0'
+
+  # Open the ingress controller port to the world
+  AcceptOnPort32356:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: 'Allow HTTPS traffic on port 32356 from the world.'
+      GroupId: 'sg-096df42733857db7f'
+      IpProtocol: tcp
+      FromPort: '32356'
+      ToPort: '32356'
       CidrIp: '0.0.0.0/0'
 
 Outputs:
@@ -77,7 +71,7 @@ Outputs:
 # aws cloudformation create-stack --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --profile kops-manager
 
 # to create a change set
-# aws cloudformation create-change-set --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --change-set-name OpenPort30638 --description 'Accept on port 30638 from the world.' --profile kops-manager
+# aws cloudformation create-change-set --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --change-set-name OpenPort32709 --description 'Accept on port 32709 from the world.' --profile kops-manager
 
 # to update the stack
 # aws cloudformation update-stack --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --profile kops-manager

@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'This stack creates a ManagedPolicy to help Cert-manager validate the DNS-01 Challenge.'
+Metadata:
+  License: Apache-2.0
+  Maintainer: Cloudvix
+  Version: '1.0'
+Resources:
+  BackupNuvemDefaultLambdaPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties: 
+      Description: 'Allow Actions on Route53.'
+      ManagedPolicyName: !Sub 'AllowActionsOnRoute53'
+      Roles:
+        - masters.cluster.cloudvix.com.br
+      PolicyDocument: 
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              -  "route53:GetChange"
+              -  "route53:ChangeResourceRecordSets"
+              -  "route53:ListResourceRecordSets"
+              -  "route53:ListHostedZonesByName"
+            Resource: "*"
+
+
+# aws cloudformation create-stack --stack-name Route53ManagedPolicy --template-body file://Route53-Policy.yaml --capabilities CAPABILITY_NAMED_IAM --profile kops-manager
+
+# to create a change set
+# aws cloudformation create-change-set --stack-name Route53ManagedPolicy --template-body file://Route53-Policy.yaml --change-set-name managedPolicy --description 'Fix the managed policy.' --capabilities CAPABILITY_NAMED_IAM --profile kops-manager
+
+# to update the stack
+# aws cloudformation update-stack --stack-name Route53ManagedPolicy --template-body file://Route53-Policy.yaml --profile kops-manager
