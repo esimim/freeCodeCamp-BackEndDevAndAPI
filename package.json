@@ -18,5 +18,6 @@
 		"node",
 		"express",
 		"backend"
-	]
+	],
+	"license": "MIT"
 }
