@@ -27,7 +27,7 @@ This section tracks the current tasks that are actively being worked on.
 
 - Create the README file, the workflow and break down the tasks.
 
-**Task 1: Create a Service to expose a deployment**
+**Task 1: Create a Service to expose a deployment** Done.
 
 - *Current Status:* Creating the service.
 
@@ -35,9 +35,12 @@ This section tracks the current tasks that are actively being worked on.
   - 1 Check the pods to create the service
   - 2 Create the service and reach the pods
 
-**Task 2: Create an Ingress to expose a service**
+**Task 2: Create an Ingress to expose a service** Done.
 
-**Task 3: Access the application from the outside world and finish lesson 1.**
+**Task 3: Access the application from the outside world and finish lesson 1.** Done.
+
+
+
 
 ## Backlog
 Tasks ordered by execution priority. Once a task in the backlog is moved to active work, copy it to the 'Ongoing Work' section.
@@ -87,14 +90,28 @@ Document daily progress here, marking any errors encountered, possible solutions
 ---
 
 
-**[Date - 2024/09/22]**
+**[Date - 2024/11/08]**
 
-- **Worked on:** [Task]
+- **Worked on:** Task3. Finished lesson 1.
 
-- **Current Status:** [Describe where you left off]
+- **Current Status:** Have to start lesson 2.
   
-- **Errors/Challenges:** [Document any current errors]
+- **Errors/Challenges:** To create the ingress controller. To create the cert-manager.
 
-- **Solution:** [If a solution is known but not implemented, document it here]
+- **Solution:** I had to edit the Deployment and Select a NodePort service for the Controller and get the traffic from there using a port. For the certificate I had to use the DNS01 challenge of cert-manager and create a IAM key for the cert-manager to use along with a role.
 
-- **Next Steps:** [Briefly describe the next steps for tomorrow's session]
+- **Next Steps:** Lesson 2.
+
+---
+
+**[Date - 2024/11/15]**
+
+- **Worked on:** Lesson 2.
+
+- **Current Status:** 
+  
+- **Errors/Challenges:** 
+
+- **Solution:** 
+
+- **Next Steps:** 
