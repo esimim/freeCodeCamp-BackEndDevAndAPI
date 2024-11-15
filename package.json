@@ -12,5 +12,11 @@
 		"url": "https://github.com/freeCodeCamp/boilerplate-npm.git"
 	},
 	"author": "Eliandro Simim",
-	"description": "This project teachs me how to build backend APIs."
+	"description": "This project teachs me how to build backend APIs.",
+	"keywords": [
+		"freecodecamp",
+		"node",
+		"express",
+		"backend"
+	],
 }
