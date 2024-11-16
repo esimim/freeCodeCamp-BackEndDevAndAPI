@@ -19,6 +19,9 @@ COPY --chown=1001:0 package.json package.json
 # Copy server.js
 COPY --chown=1001:0 server.js server.js
 COPY --chown=1001:0 myApp.js myApp.js 
+# Copy views folder and index.html
+COPY --chown=1001:0 views/ views/
+COPY --chown=1001:0 index.html index.html
 
 # list files
 RUN ls -lhart
