@@ -22,6 +22,8 @@ COPY --chown=1001:0 myApp.js myApp.js
 # Copy views folder and index.html
 COPY --chown=1001:0 views/ views/
 COPY --chown=1001:0 views/index.html views/index.html
+COPY --chown=1001:0 public/ public/
+COPY --chown=1001:0 public/style.css public/style.css
 
 # list files
 RUN ls -lhart
