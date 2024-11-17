@@ -19,6 +19,7 @@ COPY --chown=1001:0 package.json package.json
 # Copy server.js
 COPY --chown=1001:0 server.js server.js
 COPY --chown=1001:0 myApp.js myApp.js 
+COPY --chown=1001:0 .env .env
 # Copy views folder and index.html
 COPY --chown=1001:0 views/ views/
 COPY --chown=1001:0 views/index.html views/index.html
