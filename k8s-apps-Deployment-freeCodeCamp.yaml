@@ -18,12 +18,29 @@ spec:
       labels:
         app: freecodecamp
     spec:
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 0
+        fsGroup: 0
       imagePullSecrets:
         - name: github-container-registry
       containers:
       - image: ghcr.io/esimim/freecodecamp-backenddevandapi:latest
         name: freecodecamp-backenddevandapi
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
         resources: {}
+        volumeMounts:
+        - name: tls-certs
+          mountPath: "/etc/tls"
+          readOnly: true
+      volumes: 
+        - name: tls-certs
+          secret:
+            secretName: freecodecamp-tls
+            items:
+              - key: tls.crt
+                path: server.crt
+              - key: tls.key
+                path: server.key
 status: {}

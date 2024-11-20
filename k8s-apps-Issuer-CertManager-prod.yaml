@@ -11,7 +11,7 @@ spec:
     email: esimim@cloudvix.com.br
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: freecodecamp-tls
+      name: letsencrypt-prod-issuer-account-key
     # Enable the HTTP-01 challenge provider
     solvers:
     - dns01:

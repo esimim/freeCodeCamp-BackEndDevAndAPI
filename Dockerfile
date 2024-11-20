@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/nodejs-18
 USER 1001
 
 # Tell the app to listen on this port
-ENV PORT=8080
+ENV PORT=3000
 
 # Set the working directory
 WORKDIR /opt/app-root/src
@@ -37,7 +37,7 @@ RUN id -G
 RUN npm install
 
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 3000
 
 # Start the application
 CMD ["npm", "start"]
