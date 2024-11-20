@@ -29,7 +29,7 @@ const options = {
 }
 
 bGround.setupBackgroundApp(app, myApp, __dirname);
-const PORT = 443;
+const PORT = 8080;
 const listener = https.createServer(options, app).listen(PORT, console.log(`Node.js listening on port  ${PORT}`))
 
 
