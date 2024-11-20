@@ -32,12 +32,12 @@ spec:
         resources: {}
         volumeMounts:
         - name: tls-certs
-          mountPath: "/etc/tls"
+          mountPath: "/opt/app-root/src"
           readOnly: true
       volumes: 
         - name: tls-certs
           secret:
-            secretName: freecodecamp-tls
+            secretName: freecodecamp-tls-certificate
             items:
               - key: tls.crt
                 path: server.crt
