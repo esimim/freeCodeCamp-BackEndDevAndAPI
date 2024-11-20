@@ -32,7 +32,6 @@ RUN id
 RUN id -u
 RUN id -g
 RUN id -G
-RUN ls -lhart /etc/tls
 
 # Install dependencies
 RUN npm install
