@@ -28,6 +28,10 @@ COPY --chown=1001:0 public/style.css public/style.css
 
 # list files
 RUN ls -lhart
+RUN id
+RUN id -u
+RUN id -g
+RUN id -G
 
 # Install dependencies
 RUN npm install
