@@ -24,8 +24,8 @@ if (!process.env.DISABLE_XORIGIN) {
 }
 
 const options = {
-  key: fs.readFileSync('/opt/app-root/src/server.key'),
-  cert: fs.readFileSync('/opt/app-root/src/server.crt')
+  key: fs.readFileSync('/opt/app-root/src/certs/server.key'),
+  cert: fs.readFileSync('/opt/app-root/src/certs/server.crt')
 }
 
 bGround.setupBackgroundApp(app, myApp, __dirname);
