@@ -2,15 +2,15 @@
 FROM registry.access.redhat.com/ubi8/nodejs-18
 
 # Switch to the app user
-USER 1001
+USER root
 
 # Tell the app to listen on this port
-ENV PORT=3000
+ENV PORT=443
 
 # Set the working directory
 WORKDIR /opt/app-root/src
 
-RUN chown -R 1001:0 /opt/app-root/src && \
+RUN chown -R 0:0 /opt/app-root/src && \
     chmod -R g=u /opt/app-root/src
 
 # Copy package.json and package-lock.json
@@ -37,7 +37,7 @@ RUN id -G
 RUN npm install
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 443
 
 # Start the application
 CMD ["npm", "start"]

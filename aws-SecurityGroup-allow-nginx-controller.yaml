@@ -56,8 +56,8 @@ Resources:
       Description: 'Allow HTTPS traffic on port 32356 from the world.'
       GroupId: 'sg-096df42733857db7f'
       IpProtocol: tcp
-      FromPort: '32356'
-      ToPort: '32356'
+      FromPort: '32314'
+      ToPort: '32314'
       CidrIp: '0.0.0.0/0'
 
 Outputs:
@@ -74,7 +74,7 @@ Outputs:
 # aws cloudformation create-change-set --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --change-set-name OpenPort32709 --description 'Accept on port 32709 from the world.' --profile kops-manager
 
 # to update the stack
-# aws cloudformation update-stack --stack-name CloudvixSecurityGroup --template-body file://AWS-Secutiry-Group-for-Cloudvix-cluster.yaml --profile kops-manager
+# aws cloudformation update-stack --stack-name CloudvixSecurityGroup --template-body file://aws-SecurityGroup-allow-nginx-controller.yaml --profile kops-manager
 
 
 # helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace --set  controller.service.type=LoadBalancer --set controller.service.annotations."alb\.ingress\.kubernetes\.io/security-groups"="sg-0fea03381553e41b2"

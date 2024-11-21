@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: freecodecamp-tls-certificate
+  namespace: apps
+spec:
+  secretName: freecodecamp-tls-certificate
+  issuerRef:
+    name: letsencrypt-prod
+    kind: Issuer
+  commonName: freecodecamp.cluster.cloudvix.com.br  # Replace with your domain
+  dnsNames:
+  - freecodecamp.cluster.cloudvix.com.br
+  - www.freecodecamp.cluster.cloudvix.com.br
