@@ -24,13 +24,13 @@ spec:
         fsGroup: 0
       imagePullSecrets:
         - name: github-container-registry
-      initContainers:
-        - name: fix-permissions
-          image: busybox
-          command: ["sh", "-c", "chown -R 0:0 /certs"]
-          volumeMounts:
-          - name: tlscerts
-            mountPath: /certs
+      # initContainers:
+      #   - name: fix-permissions
+      #     image: busybox
+      #     command: ["sh", "-c", "chown -R 0:0 /certs"]
+      #     volumeMounts:
+      #     - name: tlscerts
+      #       mountPath: /certs
       containers:
       - image: ghcr.io/esimim/freecodecamp-backenddevandapi:latest
         name: freecodecamp-backenddevandapi
